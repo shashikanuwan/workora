@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
         collect(range(1, 2))->each(function ($id) {
             User::factory()->create([
                 'name' => "Admin {$id}",
-                'email' => "admin_{$id}@rentix.com",
+                'email' => "admin_{$id}@workora.com",
             ])
                 ->assignRole(Role::ADMIN->value);
         });
@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
                 ->has(Booking::factory()->count(5))
                 ->create([
                     'name' => "User {$id}",
-                    'email' => "user_{$id}@rentix.com",
+                    'email' => "user_{$id}@workora.com",
                 ])
                 ->assignRole(Role::USER->value);
         });

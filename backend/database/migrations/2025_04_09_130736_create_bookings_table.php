@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('company_address')->nullable();
             $table->date('start_date');
             $table->date('end_date');
-            $table->integer('price');
+            $table->float('price');
             $table->enum('status', array_map(fn ($case) => $case->value, BookingStatus::cases()));
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('package_id')->constrained()->cascadeOnDelete();

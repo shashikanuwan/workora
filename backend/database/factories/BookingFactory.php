@@ -21,7 +21,8 @@ class BookingFactory extends Factory
     public function definition(): array
     {
         $startDate = $this->faker->dateTimeBetween('now', '+1 month');
-        $endDate = $this->faker->dateTimeBetween($startDate, '+1 month');
+        $endDate = Carbon::parse($startDate)->addDays(3);
+        $package = Package::query()->inRandomOrder()->first();
 
         return [
             'company_name' => $this->faker->company(),
@@ -30,10 +31,10 @@ class BookingFactory extends Factory
             'company_address' => $this->faker->address(),
             'start_date' => $startDate,
             'end_date' => $endDate,
-            'price' => resolvePricing(Carbon::parse($startDate), Carbon::parse($endDate), 100.0),
+            'price' => resolvePricing(Carbon::parse($startDate), $endDate, $package->price_per_day),
             'status' => $this->faker->randomElement(BookingStatus::cases()),
             'user_id' => User::query()->inRandomOrder()->first(),
-            'package_id' => Package::query()->inRandomOrder()->first(),
+            'package_id' => $package,
         ];
     }
 }
