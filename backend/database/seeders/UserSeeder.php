@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Enums\Role;
+use App\Models\Booking;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -19,10 +20,12 @@ class UserSeeder extends Seeder
         });
 
         collect(range(1, 2))->each(function ($id) {
-            User::factory()->create([
-                'name' => "User {$id}",
-                'email' => "user_{$id}@rentix.com",
-            ])
+            User::factory()
+                ->has(Booking::factory()->count(5))
+                ->create([
+                    'name' => "User {$id}",
+                    'email' => "user_{$id}@rentix.com",
+                ])
                 ->assignRole(Role::USER->value);
         });
     }
