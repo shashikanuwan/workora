@@ -3,6 +3,8 @@
 use App\Models\Package;
 use Workora\Package\Actions\UpdatePackage;
 
+use function Pest\Laravel\assertDatabaseHas;
+
 it('can update package', function () {
     $package = Package::factory()->create();
 
@@ -15,9 +17,13 @@ it('can update package', function () {
             2000.0,
         );
 
-    expect($updatedPackage)->toBeInstanceOf(Package::class)
-        ->and($updatedPackage->name)->toBe('Updated Package')
-        ->and($updatedPackage->description)->toBe('Updated Description')
-        ->and($updatedPackage->seat)->toBe(10)
-        ->and($updatedPackage->price_per_day)->toBe(2000.00);
+    expect($updatedPackage)->toBeInstanceOf(Package::class);
+
+    assertDatabaseHas(Package::class, [
+        'id' => $package->id,
+        'name' => 'Updated Package',
+        'description' => 'Updated Description',
+        'seat' => 10,
+        'price_per_day' => 2000.0,
+    ]);
 });
