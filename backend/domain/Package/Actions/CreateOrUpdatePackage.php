@@ -4,7 +4,7 @@ namespace Workora\Package\Actions;
 
 use App\Models\Package;
 
-class UpdatePackage
+class CreateOrUpdatePackage
 {
     public function execute(
         Package $package,
@@ -13,7 +13,6 @@ class UpdatePackage
         int $seat,
         float $pricePerDay,
     ): Package {
-        $package = Package::query()->find($package->id);
         $package->name = $name;
         $package->description = $description;
         $package->seat = $seat;

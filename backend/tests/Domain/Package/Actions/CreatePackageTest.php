@@ -1,13 +1,14 @@
 <?php
 
 use App\Models\Package;
-use Workora\Package\Actions\CreatePackage;
+use Workora\Package\Actions\CreateOrUpdatePackage;
 
 use function Pest\Laravel\assertDatabaseHas;
 
 it('can create package', function () {
-    $package = resolve(CreatePackage::class)
+    $package = resolve(CreateOrUpdatePackage::class)
         ->execute(
+            new Package,
             'Test Package',
             'Test Description',
             5,
