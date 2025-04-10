@@ -15,6 +15,7 @@ it('can create booking', function () {
 
     $booking = resolve(CreateBooking::class)
         ->execute(
+            'John Doe',
             'Company Name',
             '123456789',
             'test@workora.com',
@@ -30,6 +31,8 @@ it('can create booking', function () {
     expect($booking)->toBeInstanceOf(Booking::class);
 
     assertDatabaseHas(Booking::class, [
+        'id' => $booking->id,
+        'full_name' => 'John Doe',
         'company_name' => 'Company Name',
         'company_telephone_number' => '123456789',
         'company_email' => 'test@workora.com',

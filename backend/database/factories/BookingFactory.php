@@ -25,6 +25,7 @@ class BookingFactory extends Factory
         $package = Package::query()->inRandomOrder()->first();
 
         return [
+            'full_name' => $this->faker->name(),
             'company_name' => $this->faker->company(),
             'company_telephone_number' => $this->faker->phoneNumber(),
             'company_email' => $this->faker->unique()->safeEmail(),

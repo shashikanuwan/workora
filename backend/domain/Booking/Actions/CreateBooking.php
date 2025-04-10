@@ -11,6 +11,7 @@ use Carbon\Carbon;
 class CreateBooking
 {
     public function execute(
+        string $fullName,
         string $companyName,
         string $companyTelephoneNumber,
         string $companyEmail,
@@ -23,6 +24,7 @@ class CreateBooking
         Package $package
     ): Booking {
         $booking = new Booking;
+        $booking->full_name = $fullName;
         $booking->company_name = $companyName;
         $booking->company_telephone_number = $companyTelephoneNumber;
         $booking->company_email = $companyEmail;
