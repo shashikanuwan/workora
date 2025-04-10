@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Booking\CreateBookingController;
 use App\Http\Controllers\Package\CreatePackageController;
 use App\Http\Controllers\Package\DeletePackageController;
 use App\Http\Controllers\Package\FetchPackageController;
@@ -17,4 +18,6 @@ Route::middleware(['auth:sanctum', 'role:admin'])
         Route::post('packages', CreatePackageController::class);
         Route::put('packages/{package}', UpdatePackageController::class);
         Route::delete('packages/{package}', DeletePackageController::class);
+
+        Route::post('bookings', CreateBookingController::class);
     });
