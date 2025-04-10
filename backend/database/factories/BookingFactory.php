@@ -33,7 +33,7 @@ class BookingFactory extends Factory
             'end_date' => $endDate,
             'price' => resolvePricing(Carbon::parse($startDate), $endDate, $package->price_per_day),
             'status' => $this->faker->randomElement(BookingStatus::cases()),
-            'user_id' => User::query()->inRandomOrder()->first(),
+            'user_id' => User::factory(),
             'package_id' => $package,
         ];
     }
