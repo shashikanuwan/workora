@@ -4,7 +4,7 @@ namespace App\Http\Requests\Package;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreatePackageRequest extends FormRequest
+class CreateOrUpdatePackageRequest extends FormRequest
 {
     public function authorize(): bool
     {

@@ -9,14 +9,14 @@ use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Workora\Package\Actions\CreateOrUpdatePackage;
 
-class CreatePackageController extends Controller
+class UpdatePackageController extends Controller
 {
-    public function __construct(protected CreateOrUpdatePackage $createPackage) {}
+    public function __construct(protected CreateOrUpdatePackage $updatePackage) {}
 
-    public function __invoke(CreateOrUpdatePackageRequest $request): JsonResponse
+    public function __invoke(CreateOrUpdatePackageRequest $request, Package $package): JsonResponse
     {
-        $this->createPackage->execute(
-            new Package,
+        $this->updatePackage->execute(
+            $package,
             $request->validated('name'),
             $request->validated('description'),
             $request->validated('seat'),
@@ -24,7 +24,7 @@ class CreatePackageController extends Controller
         );
 
         return response()->json([
-            'status' => 'Package created successfully',
-        ], Response::HTTP_CREATED);
+            'status' => 'Package updated successfully',
+        ], Response::HTTP_OK);
     }
 }
