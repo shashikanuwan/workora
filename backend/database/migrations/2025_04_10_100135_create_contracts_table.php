@@ -10,8 +10,8 @@ return new class extends Migration
     {
         Schema::create('contracts', function (Blueprint $table) {
             $table->id();
-            $table->string('file_name')->unique();
-            $table->foreignId('uploaded_by')->constrained('users')->cascadeOnDelete();
+            $table->string('document')->unique()->nullable();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('booking_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });

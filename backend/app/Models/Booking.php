@@ -52,4 +52,9 @@ class Booking extends Model
     {
         return $this->hasMany(Extend::class);
     }
+
+    public function contracts(): HasMany
+    {
+        return $this->hasMany(Contract::class);
+    }
 }
