@@ -11,6 +11,7 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
+            $table->string('full_name');
             $table->string('company_name')->nullable();
             $table->string('company_telephone_number');
             $table->string('company_email');
