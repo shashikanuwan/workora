@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
+ * @property string $name
+ * @property string $description
+ * @property int $seat
  * @property float $price_per_day
  */
 class Package extends Model
