@@ -11,6 +11,6 @@ class FetchBookingController extends Controller
 {
     public function __invoke(BookingRepository $bookingRepository): AnonymousResourceCollection
     {
-        return BookingResource::collection($bookingRepository->getAllBooking());
+        return BookingResource::collection($bookingRepository->getAllBookings());
     }
 }

@@ -3,8 +3,10 @@
 namespace App\Models;
 
 use App\Enums\BookingStatus;
+use App\Models\Queries\BookingQueryBuilder;
 use Carbon\Carbon;
 use Database\Factories\BookingFactory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -25,6 +27,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property int $user_id
  * @property int $package_id
  * @property Package $package
+ *
+ * @method static BookingQueryBuilder query()
+ * @method static BookingQueryBuilder
  */
 class Booking extends Model
 {
@@ -82,5 +87,10 @@ class Booking extends Model
         return Attribute::make(
             get: fn (?string $value) => $value ? 'Rs.'.$value : null,
         );
+    }
+
+    public function newEloquentBuilder($query): Builder
+    {
+        return new BookingQueryBuilder($query);
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Booking\ConfirmBookingController;
 use App\Http\Controllers\Booking\CreateBookingController;
 use App\Http\Controllers\Booking\FetchBookingController;
 use App\Http\Controllers\Package\CreatePackageController;
@@ -21,4 +22,5 @@ Route::middleware(['auth:sanctum', 'role:admin'])
 
         Route::get('bookings', FetchBookingController::class);
         Route::post('bookings', CreateBookingController::class);
+        Route::patch('bookings/{booking}/confirm', ConfirmBookingController::class);
     });

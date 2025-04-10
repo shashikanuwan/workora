@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use App\Enums\BookingStatus;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -32,8 +33,16 @@ class BookingResource extends JsonResource
             'company_address' => $this->company_address,
             'start_date' => $this->start_date,
             'end_date' => $this->end_date,
+            'booking_days' => $this->generateBookingDays(Carbon::parse($this->start_date), Carbon::parse($this->end_date)),
             'price' => $this->price,
             'status' => $this->status,
         ];
+    }
+
+    private function generateBookingDays(Carbon $startDate, Carbon $endDate): array
+    {
+        return Collection::times($startDate->diffInDays($endDate) + 1, function ($i) use ($startDate) {
+            return $startDate->copy()->addDays($i - 1)->toDateString();
+        })->all();
     }
 }
