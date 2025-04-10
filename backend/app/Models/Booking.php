@@ -11,7 +11,16 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
+ * @property string $company_name
+ * @property mixed|string $company_telephone_number
+ * @property string $company_email
+ * @property string $company_address
+ * @property Carbon $start_date
  * @property Carbon $end_date
+ * @property float $price
+ * @property BookingStatus $status
+ * @property int $user_id
+ * @property int $package_id
  * @property Package $package
  */
 class Booking extends Model
@@ -23,6 +32,7 @@ class Booking extends Model
     {
         return [
             'status' => BookingStatus::class,
+
         ];
     }
 
