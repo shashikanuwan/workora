@@ -8,8 +8,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Workora\Booking\Actions\CreateBooking;
 
 it('can create a new booking', function () {
-    SpatieRole::create(['name' => Role::ADMIN]);
-    $user = User::factory()->create()->assignRole(Role::ADMIN);
+    SpatieRole::create(['name' => Role::USER]);
+    $user = User::factory()->create()->assignRole(Role::USER);
     $package = Package::factory()->create();
 
     mock(CreateBooking::class)

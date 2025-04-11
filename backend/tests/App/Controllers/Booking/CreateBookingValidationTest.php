@@ -8,8 +8,8 @@ use Spatie\Permission\Models\Role as SpatieRole;
 use Symfony\Component\HttpFoundation\Response;
 
 beforeEach(function () {
-    SpatieRole::create(['name' => Role::ADMIN]);
-    $this->user = User::factory()->create()->assignRole(Role::ADMIN);
+    SpatieRole::create(['name' => Role::USER]);
+    $this->user = User::factory()->create()->assignRole(Role::USER);
     $this->package = Package::factory()->create();
 });
 

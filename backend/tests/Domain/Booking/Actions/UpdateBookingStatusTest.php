@@ -3,11 +3,13 @@
 use App\Enums\BookingStatus;
 use App\Models\Booking;
 use App\Models\Package;
+use Illuminate\Support\Facades\Event;
 use Workora\Booking\Actions\UpdateBookingStatus;
 
 use function Pest\Laravel\assertDatabaseHas;
 
 it('can update booking', function () {
+    Event::fake();
     $package = Package::factory()->create([
         'price_per_day' => 1000,
     ]);
