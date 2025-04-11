@@ -3,7 +3,9 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Queries\UserQueryBuilder;
 use Database\Factories\UserFactory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -12,6 +14,10 @@ use Spatie\Permission\Traits\HasRoles;
 
 /**
  * @property int $id
+ * @property string $name
+ *
+ * @method static UserQueryBuilder query()
+ * @method static TaskQueryBuilder
  */
 class User extends Authenticatable
 {
@@ -37,8 +43,14 @@ class User extends Authenticatable
         ];
     }
 
+    // relationships
     public function bookings(): HasMany
     {
         return $this->hasMany(Booking::class);
+    }
+
+    public function newEloquentBuilder($query): Builder
+    {
+        return new UserQueryBuilder($query);
     }
 }
