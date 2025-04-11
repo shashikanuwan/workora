@@ -14,6 +14,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 /**
  * @property int $id
+ * @property string $name
  *
  * @method static UserQueryBuilder query()
  * @method static TaskQueryBuilder

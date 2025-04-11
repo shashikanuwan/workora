@@ -28,6 +28,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property int $user_id
  * @property int $package_id
  * @property Package $package
+ * @property User $user
  *
  * @method static BookingQueryBuilder query()
  * @method static BookingQueryBuilder

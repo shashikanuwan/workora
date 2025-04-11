@@ -9,19 +9,24 @@ use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Workora\Booking\Actions\UpdateBookingStatus;
 
-class ConfirmBookingController extends Controller
+class UpdateBookingStatusController extends Controller
 {
     public function __construct(protected UpdateBookingStatus $updateBookingStatus) {}
 
-    public function __invoke(Booking $booking): JsonResponse
+    public function __invoke(Booking $booking, string $status): JsonResponse
     {
+        $statusMap = [
+            'confirm' => BookingStatus::CONFIRMED,
+            'cancel' => BookingStatus::CANCELED,
+        ];
+
         $this->updateBookingStatus->execute(
             $booking,
-            BookingStatus::CONFIRMED
+            $statusMap[$status]
         );
 
         return response()->json([
-            'status' => 'Booking confirmed',
+            'status' => 'Booking '.$statusMap[$status]->value,
         ], Response::HTTP_OK);
     }
 }

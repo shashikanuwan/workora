@@ -13,6 +13,7 @@ class BookingRepository
     public function getAllBookings(?Package $package = null, int $perPage = 10): LengthAwarePaginator
     {
         return $this->getBookingsQuery($package)
+            ->with('user', 'package')
             ->orderBy('start_date')
             ->paginate($perPage);
     }

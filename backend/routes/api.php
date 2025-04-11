@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\Booking\ConfirmBookingController;
 use App\Http\Controllers\Booking\CreateBookingController;
-use App\Http\Controllers\Booking\FetchBookingController;
+use App\Http\Controllers\Booking\FetchAllBookingController;
+use App\Http\Controllers\Booking\UpdateBookingStatusController;
 use App\Http\Controllers\Package\CreatePackageController;
 use App\Http\Controllers\Package\DeletePackageController;
 use App\Http\Controllers\Package\FetchPackageController;
@@ -20,7 +20,12 @@ Route::middleware(['auth:sanctum', 'role:admin'])
         Route::put('packages/{package}', UpdatePackageController::class);
         Route::delete('packages/{package}', DeletePackageController::class);
 
-        Route::get('bookings', FetchBookingController::class);
+        Route::get('bookings', FetchAllBookingController::class);
+        Route::patch('bookings/{booking}/{status}', UpdateBookingStatusController::class)
+            ->whereIn('status', ['confirm', 'cancel']);
+    });
+
+Route::middleware(['auth:sanctum', 'role:user'])
+    ->group(function () {
         Route::post('bookings', CreateBookingController::class);
-        Route::patch('bookings/{booking}/confirm', ConfirmBookingController::class);
     });

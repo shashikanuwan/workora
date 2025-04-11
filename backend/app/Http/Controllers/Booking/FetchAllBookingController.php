@@ -7,7 +7,7 @@ use App\Http\Resources\BookingResource;
 use App\Repositories\BookingRepository;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
-class FetchBookingController extends Controller
+class FetchAllBookingController extends Controller
 {
     public function __invoke(BookingRepository $bookingRepository): AnonymousResourceCollection
     {

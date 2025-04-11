@@ -36,6 +36,8 @@ class BookingResource extends JsonResource
             'booking_days' => $this->generateBookingDays(Carbon::parse($this->start_date), Carbon::parse($this->end_date)),
             'price' => $this->price,
             'status' => $this->status,
+            'package' => new PackageResource($this->whenLoaded('package')),
+            'user' => new UserResource($this->whenLoaded('user')),
         ];
     }
 
