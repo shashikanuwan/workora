@@ -42,7 +42,6 @@ class Booking extends Model
     {
         return [
             'status' => BookingStatus::class,
-
         ];
     }
 
