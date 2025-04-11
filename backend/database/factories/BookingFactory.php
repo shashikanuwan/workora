@@ -38,4 +38,11 @@ class BookingFactory extends Factory
             'package_id' => $package,
         ];
     }
+
+    public function pending(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'status' => BookingStatus::PENDING,
+        ]);
+    }
 }
