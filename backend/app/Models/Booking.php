@@ -6,6 +6,7 @@ use App\Enums\BookingStatus;
 use App\Models\Queries\BookingQueryBuilder;
 use Carbon\Carbon;
 use Database\Factories\BookingFactory;
+use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -87,6 +88,12 @@ class Booking extends Model
         return Attribute::make(
             get: fn (?string $value) => $value ? 'Rs.'.$value : null,
         );
+    }
+
+    #[Scope]
+    public function unavailable(Builder $query): Builder
+    {
+        return $query->whereIn('status', [BookingStatus::PENDING, BookingStatus::CONFIRMED]);
     }
 
     public function newEloquentBuilder($query): Builder

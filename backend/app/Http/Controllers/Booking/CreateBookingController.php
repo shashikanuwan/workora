@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Booking;
 
 use App\Enums\BookingStatus;
+use App\Exceptions\BookingDateAlreadyReservedException;
 use App\Exceptions\InvalidDateRangeException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Booking\CreateBookingRequest;
@@ -17,7 +18,7 @@ class CreateBookingController extends Controller
     public function __construct(protected CreateBooking $createBooking) {}
 
     /**
-     * @throws InvalidDateRangeException
+     * @throws InvalidDateRangeException|BookingDateAlreadyReservedException
      */
     public function __invoke(CreateBookingRequest $request): JsonResponse
     {

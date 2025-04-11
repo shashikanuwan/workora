@@ -52,8 +52,11 @@ class CreateBooking
     private function ensureBookingDateIsAvailable(Carbon $startDate, Carbon $endDate, Package $package): void
     {
         $existingBooking = Booking::query()
-            ->where('package_id', $package->id)
-            ->whereOverlaps($startDate, $endDate)
+            ->where(function ($query) use ($startDate, $endDate, $package) {
+                $query->where('package_id', $package->id);
+                $query->unavailable();
+                $query->whereOverlaps($startDate, $endDate);
+            })
             ->exists();
 
         if ($existingBooking) {
