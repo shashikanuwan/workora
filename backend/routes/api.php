@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Booking\CreateBookingController;
+use App\Http\Controllers\Booking\ExtendBookingController;
 use App\Http\Controllers\Booking\FetchAllBookingController;
 use App\Http\Controllers\Booking\UpdateBookingStatusController;
 use App\Http\Controllers\Package\CreatePackageController;
@@ -23,6 +24,7 @@ Route::middleware(['auth:sanctum', 'role:admin'])
         Route::get('bookings', FetchAllBookingController::class);
         Route::patch('bookings/{booking}/{status}', UpdateBookingStatusController::class)
             ->whereIn('status', ['confirm', 'cancel']);
+        Route::post('booking-extend', ExtendBookingController::class);
     });
 
 Route::middleware(['auth:sanctum', 'role:user'])
